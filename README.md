@@ -1,18 +1,14 @@
 # Cloudflare Diagnostic Tool
 
-A single-page React application for generating diagnostic reports for Cloudflare Workers and Pages. Paste an API token to connect, select resources, and generate a downloadable report.
+A simple static page for generating diagnostic reports for Cloudflare Workers and Pages. It runs entirely in the browser with HTML, CSS and vanilla JavaScript.
 
-## Development
+## Usage
 
-```bash
-npm install
-npm run dev
-```
+1. Open `index.html` in any modern browser or deploy the repository to a static host such as Cloudflare Pages.
+2. Enter a Cloudflare API token with permissions to read Workers and Pages.
+3. Select the resources to inspect and click **Generate Report** to view the details.
+4. Use **Full Report** to verify the token information.
 
-## Build
+No build step or package installation is required.
 
-```bash
-npm run build
-```
-
-The application stores the API token only in memory and reminds users in the footer to reset their API key by April 4, 2026.
+The application stores the API token only in memory and reminds users to reset their API key by April 4, 2026.

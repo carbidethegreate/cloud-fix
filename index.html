@@ -1,13 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cloudflare Diagnostic</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloudflare Diagnostic</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Cloudflare Diagnostic</h1>
+    <span id="status" class="status not-connected">Not connected</span>
+  </header>
+  <div class="container">
+    <aside class="sidebar">
+      <input id="search" type="text" placeholder="Search Workers & Pages" aria-label="Search" />
+      <section>
+        <div class="section-header">
+          <h2>Workers</h2>
+          <label><input type="checkbox" id="workers-select-all" /> Select All</label>
+        </div>
+        <ul id="workers-list" class="list"></ul>
+      </section>
+      <section>
+        <div class="section-header">
+          <h2>Pages</h2>
+          <label><input type="checkbox" id="pages-select-all" /> Select All</label>
+        </div>
+        <ul id="pages-list" class="list"></ul>
+      </section>
+    </aside>
+    <main class="main">
+      <div id="token-card" class="card">
+        <label for="token">API Token</label>
+        <input type="password" id="token" aria-label="API Token" />
+        <button id="connect">OK</button>
+      </div>
+      <div class="actions">
+        <button id="generate" disabled>Generate Report</button>
+        <button id="full-report" disabled>Full Report</button>
+      </div>
+      <div id="report"></div>
+    </main>
+  </div>
+  <footer class="footer">
+    Remember to reset your API key by April 4, 2026.
+  </footer>
+  <script src="main.js"></script>
+</body>
 </html>

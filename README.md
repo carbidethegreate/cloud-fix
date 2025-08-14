@@ -5,7 +5,7 @@ A simple static page for generating diagnostic reports for Cloudflare Workers an
 ## Usage
 
 1. Open `index.html` in any modern browser or deploy the repository to a static host such as Cloudflare Pages.
-2. Enter a Cloudflare API token with permissions to read Workers and Pages.
+2. Enter a Cloudflare API token with permissions to read Workers and Pages. Tokens scoped to a single account are supported.
 3. Select the resources to inspect and click **Generate Report** to view the details.
 4. Use **Full Report** to verify the token information.
 

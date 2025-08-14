@@ -21,14 +21,9 @@ async function connect() {
   token = tokenInput.value.trim();
   if (!token) return;
   try {
-    const res = await fetch('https://api.cloudflare.com/client/v4/accounts', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.errors?.[0]?.message || 'Failed to connect');
-    const accs = data.result;
-    if (!accs || accs.length === 0) throw new Error('No accounts found');
-    accountId = accs[0].id;
+    const verify = await cfFetch('/user/tokens/verify');
+    accountId = getAccountId(verify);
+    if (!accountId) throw new Error('Account ID not found');
     statusEl.textContent = 'Connected';
     statusEl.classList.remove('not-connected');
     statusEl.classList.add('connected');
@@ -47,8 +42,20 @@ async function cfFetch(path) {
     headers: { Authorization: `Bearer ${token}` }
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data.errors?.[0]?.message || res.statusText);
+  if (!res.ok || data.success === false) {
+    throw new Error(data.errors?.[0]?.message || res.statusText);
+  }
   return data.result;
+}
+
+function getAccountId(verify) {
+  for (const policy of verify?.policies || []) {
+    for (const resource of Object.keys(policy.resources || {})) {
+      const match = resource.match(/^com\.cloudflare\.api\.account\.(.+)$/);
+      if (match) return match[1];
+    }
+  }
+  return null;
 }
 
 async function loadWorkers() {
